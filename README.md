@@ -1,4 +1,4 @@
-# Nvim
+# nvim-nuxt-config
 
 Neovim config files / plugins for a Nuxt project
 
