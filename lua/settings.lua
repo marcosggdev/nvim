@@ -2,7 +2,7 @@ local set = vim.opt
 
 -- General Vim configs
 set.number = true          
-set.relativenumber = true  
+set.relativenumber = false  
 set.tabstop = 2        
 set.shiftwidth = 2          
 set.expandtab = true 
