@@ -164,24 +164,13 @@ return {
     end
   },
 
-  -- Auto session -> Restores tabs and state after closing Nvim (nicely, not with SIGHUP)
   {
-    "rmagatti/auto-session",
+    "mhinz/vim-startify",
     config = function()
-      local sessionoptions = vim.o.sessionoptions
-      if sessionoptions == "" then
-        vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos,localoptions"
-      elseif not sessionoptions:match("localoptions") then
-        vim.o.sessionoptions = sessionoptions .. ",localoptions"
-      end
-      require("auto-session").setup {
-        log_level = "info",
-        auto_session_enable_last_session = true, -- loads latest session when opening nvim
-        auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
-        auto_session_enabled = true,
-      }
-      end,
+      vim.g.startify_session_persistence = 1  -- save session automatically
+    end
   },
+
 
   -- Telescope -> Powerfull file finder. Ignores .git, .node_modules, and some more directories
   {
