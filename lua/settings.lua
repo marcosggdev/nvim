@@ -3,11 +3,13 @@ local set = vim.opt
 -- General Vim configs
 set.number = true          
 set.relativenumber = true  
-set.tabstop = 4             
-set.shiftwidth = 4          
-set.expandtab = true        
+set.tabstop = 2        
+set.shiftwidth = 2          
+set.expandtab = true 
+set.softtabstop = 2       
 set.clipboard = 'unnamedplus' 
 set.termguicolors = true
+
 
 -- Formatter.nvim: Auto format on save
 vim.cmd([[
