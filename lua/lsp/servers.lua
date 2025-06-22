@@ -9,7 +9,7 @@ function M.setup()
     if lspconfig[server] and type(lspconfig[server].setup) == "function" then
       lspconfig[server].setup({})
     else
-      print("Warning: LSP server '" .. server .. "' no está disponible")
+      print("Warning: LSP server '" .. server .. "' not available")
     end
   end
 end
