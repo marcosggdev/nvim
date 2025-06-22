@@ -28,6 +28,12 @@ return {
         view = {
           width = 30,
           side = "left",
+          mappings = {
+            list = {
+              { key = "z", action = "close_node" },    -- Collapse current directory
+              { key = "Z", action = "collapse_all" }, -- Collapse all directories
+            },
+          },
         },
         renderer = {
           icons = {
@@ -127,7 +133,7 @@ return {
     "mhartington/formatter.nvim",
     config = function()
     require('formatter').setup({
-      logging = false,
+      logging = true,
       filetype = {
         javascript = {
           -- Prettier for JS
