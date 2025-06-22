@@ -1,0 +1,19 @@
+local M = {}
+
+function M.setup()
+  local lspconfig = require("lspconfig")
+
+  local servers = { "volar", "ts_ls", "html", "cssls" }
+  for _, server in ipairs(servers) do
+    if lspconfig[server] and type(lspconfig[server].setup) == "function" then
+      lspconfig[server].setup({})
+    else
+      print("Warning: LSP server '" .. server .. "' no está disponible")
+    end
+  end
+end
+
+return M
+
+
+
