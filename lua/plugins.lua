@@ -1,61 +1,6 @@
 return {
-  { "neovim/nvim-lspconfig" }, -- tu LSP
 
-  -- NvimTree
-  {
-    "nvim-tree/nvim-tree.lua",
-    lazy = false,
-    dependencies = { "nvim-tree/nvim-web-devicons" }, -- íconos bonitos para los archivos
-    config = function()
-      require("nvim-tree").setup({
-        -- Aquí puedes poner tu configuración personalizada
-        -- Por ejemplo:
-        view = {
-          width = 30,
-          side = "left",
-        },
-        renderer = {
-          icons = {
-            show = {
-              git = true,
-              folder = true,
-              file = true,
-              folder_arrow = true,
-            },
-          },
-        },
-        -- Otras opciones que quieras ajustar
-      })
-    end,
-  },
-  -- akinsho/toggleterm.nvim -> embedded cmd
-  {
-  "akinsho/toggleterm.nvim",
-  version = "*",
-  config = function()
-    require("toggleterm").setup({
-      size = 20,
-      open_mapping = [[<c-\>]],  -- Ctrl + \
-      shading_factor = 2,
-      direction = "float",       -- también puede ser "horizontal" o "vertical"
-      float_opts = {
-        border = "curved",
-        winblend = 0,
-      },
-    })
-    end,
-  },
-
-  --folke/tokyonight.nvim -> theme
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,  -- para que se cargue al iniciar
-    priority = 1000, -- para que se cargue antes que otros plugins
-    config = function()
-      vim.cmd([[colorscheme tokyonight]])
-    end,
-  },
-
+  --lspconfig -> provides ready to use configs for language servers 
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -73,7 +18,60 @@ return {
     end,
   },
 
-  -- Treesitter para mejor resaltado
+  -- NvimTree -> Show directory structure
+  {
+    "nvim-tree/nvim-tree.lua",
+    lazy = false,
+    dependencies = { "nvim-tree/nvim-web-devicons" }, -- Nice icons for files
+    config = function()
+      require("nvim-tree").setup({
+        view = {
+          width = 30,
+          side = "left",
+        },
+        renderer = {
+          icons = {
+            show = {
+              git = true,
+              folder = true,
+              file = true,
+              folder_arrow = true,
+            },
+          },
+        },
+      })
+    end,
+  },
+
+  -- akinsho/toggleterm.nvim -> embedded cmd
+  {
+  "akinsho/toggleterm.nvim",
+  version = "*",
+  config = function()
+    require("toggleterm").setup({
+      size = 20,
+      open_mapping = [[<c-\>]],  -- Ctrl + \
+      shading_factor = 2,
+      direction = "float",       -- could be "horizontal" or "vertical" too
+      float_opts = {
+        border = "curved",
+        winblend = 0,
+      },
+    })
+    end,
+  },
+
+  --folke/tokyonight.nvim -> theme
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,  -- Load at start (solves an error)
+    priority = 1000, -- Load before other plugins (solves errors)
+    config = function()
+      vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
+
+  -- Treesitter syntax highlights
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -85,7 +83,7 @@ return {
     end,
   },
 
-  -- Autocompletado
+  -- Autocomplete
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -132,7 +130,7 @@ return {
       logging = false,
       filetype = {
         javascript = {
-          -- Usa prettier para JS
+          -- Prettier for JS
           function()
             return {
               exe = "prettier",
@@ -142,7 +140,7 @@ return {
           end,
         },
         typescript = {
-          -- También prettier para TS
+          -- Prettier for TS
           function()
             return {
               exe = "prettier",
@@ -152,7 +150,7 @@ return {
           end,
         },
         vue = {
-          -- prettier también sirve para Vue
+          -- Prettier for Vue
           function()
             return {
               exe = "prettier",
@@ -166,7 +164,7 @@ return {
     end
   },
 
-  -- Auto session
+  -- Auto session -> Restores tabs and state after closing Nvim (nicely, not with SIGHUP)
   {
     "rmagatti/auto-session",
     config = function()
@@ -178,14 +176,14 @@ return {
       end
       require("auto-session").setup {
         log_level = "info",
-        auto_session_enable_last_session = true, -- carga la última sesión al abrir nvim
+        auto_session_enable_last_session = true, -- loads latest session when opening nvim
         auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
         auto_session_enabled = true,
       }
       end,
   },
 
-  -- Telescope
+  -- Telescope -> Powerfull file finder. Ignores .git, .node_modules, and some more directories
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },

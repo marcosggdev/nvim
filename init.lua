@@ -1,8 +1,8 @@
--- Preparar lazy.nvim en el runtimepath y clonar si falta
+-- Prepare lazy.nvim at runtimepath or clone if doesnt exist
 local lazypath = vim.fn.stdpath("data") .. "/site/pack/lazy/start/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
-  print("lazy.nvim no está instalado. Clonándolo ahora...")
+  print("lazy.nvim not installed. Cloning it now...")
   vim.fn.system({
     "git",
     "clone",
@@ -11,17 +11,15 @@ if not vim.loop.fs_stat(lazypath) then
     "--branch=stable",
     lazypath,
   })
-  print("lazy.nvim clonado. Reinicia Neovim.")
+  print("lazy.nvim cloned. Restart Neovim.")
   vim.opt.rtp:prepend(lazypath)
   return
 end
 
-vim.opt.rtp:prepend(lazypath)
-
--- Ahora sí, carga lazy.nvim y plugins
+-- Load lazy.nvim and plugins from plugins.lua
 require("lazy").setup(require("plugins"))
 
--- Y después carga el resto de tu configuración
+-- Load the rest of config files
 require('lsp')
 require('settings')
 require('mappings')

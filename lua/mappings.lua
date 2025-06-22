@@ -11,8 +11,8 @@ map("n", "<Leader>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
 
 -- Telescope
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc = "Buscar archivos"})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {desc = "Buscar texto en proyecto"})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {desc = "Listar buffers abiertos"})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {desc = "Buscar en ayuda de Vim"})
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc = "Look for files"})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {desc = "Look for text in the project"})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {desc = "List open buffers"})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {desc = "Search at Vim help"})
 
