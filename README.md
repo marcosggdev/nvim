@@ -25,18 +25,14 @@ Neovim config files / plugins for a Nuxt project
     your ~/AppData/Local/nvim-data/sessions, since startify will try to save and load from there.
 
   - Also, for some plugins to work, you'll need to install fd (file finder which Telescope will use) and prettier globally.
-    To download and install fd, install chocolatey for windows using powershell with admin privileges:
+      - To download and install fd, install chocolatey for windows using powershell with admin privileges:
     `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
     `
-    After that, enable scripts execution:
-    `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
-    Now you are able to install fd with the command:
-    `choco install fd`  
-    Once you have fd, install prettier GLOBALLY:
-    `npm install -g prettier`
-    Also for the formatter, you'll need a C compiler. I installed MinGW64 from:
-    `https://www.mingw-w64.org/downloads/`
-    You'll need to add its bin dir to the windows PATH, and test if the commands g++ and gcc work at the cmd globally
+      - After that, enable scripts execution: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
+      - Now you are able to install fd with the command: `choco install fd`  
+      - Once you have fd, install prettier GLOBALLY: `npm install -g prettier`
+      - Also for the formatter, you'll need a C compiler. I installed MinGW64 from: `https://www.mingw-w64.org/downloads/`
+      - You'll need to add its bin dir to the windows PATH, and test if the commands g++ and gcc work at the cmd globally
 
     And that should be it. If you try to open Nvim and errors appear, dont worry. Probably theres a missing dependency. These config files purpose is that: ensure that
     the config files are fine.
