@@ -180,7 +180,7 @@ return {
     require('telescope').setup{
       defaults = {
         vimgrep_arguments = {
-          'rg',
+          'fd',
           '--color=never',
           '--no-heading',
           '--with-filename',
