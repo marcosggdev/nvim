@@ -56,7 +56,7 @@ return {
   config = function()
     require("toggleterm").setup({
       size = 20,
-      open_mapping = [[<c-\>]],  -- Ctrl + \
+      open_mapping = [[<c-\\>]],  -- Ctrl + \
       shading_factor = 2,
       direction = "float",       -- could be "horizontal" or "vertical" too
       float_opts = {

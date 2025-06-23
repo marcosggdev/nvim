@@ -9,6 +9,9 @@ set.expandtab = true
 set.softtabstop = 2       
 set.clipboard = 'unnamedplus' 
 set.termguicolors = true
+vim.api.nvim_set_hl(0, "StatusLine", { fg = "#FFFFFF", bg = "#1E1E1E" })
+vim.api.nvim_set_hl(0, "StatusLineNC", { fg = "#888888", bg = "#1E1E1E" })
+
 
 
 -- Formatter.nvim: Auto format on save

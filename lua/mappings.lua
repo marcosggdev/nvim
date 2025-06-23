@@ -1,12 +1,14 @@
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
+vim.g.mapleader = ","
+vim.g.maplocalleader = ","
+
 -- NvimTreeToggle
 map('n', '<Leader>e', ':NvimTreeToggle<CR>', opts) -- Abrir/cerrar NvimTree
 map('n', '<C-n>', ':NvimTreeToggle<CR>', opts) -- Abrir/cerrar NvimTree
-map('n', '<Leader>f', ':Telescope find_files<CR>', opts) -- Buscar archivos
 
--- toggleterm ctrl +
+-- toggleterm
 map("n", "<Leader>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
 
 -- Telescope
