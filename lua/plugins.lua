@@ -63,7 +63,6 @@ return {
         return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
       end
 
-      -- Aquí defines tus keymaps personalizados
     vim.keymap.set("n", "z", function() require("nvim-tree.actions.node").close_node() end, opts("Close Node"))
     vim.keymap.set("n", "Z", api.tree.collapse_all, opts("Collapse All"))
 
@@ -74,7 +73,6 @@ return {
       view = {
         width = 30,
         side = "left",
-        -- NO pongas mappings aquí
       },
       renderer = {
         icons = {
