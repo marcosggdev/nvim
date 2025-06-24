@@ -17,15 +17,18 @@ return {
 
       local function on_attach(bufnr)
         local api = require("nvim-tree.api")
+        local actions_tree = require("nvim-tree.actions.tree")
 
         local function opts(desc)
           return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
         end
 
-        -- Aquí defines tus keymaps personalizados
-        vim.keymap.set("n", "z", api.node.close_node, opts("Close Node"))
-        vim.keymap.set("n", "Z", api.tree.collapse_all, opts("Collapse All"))
+        vim.keymap.set("n", "<CR>", function() api.node.open.edit() end, opts("Open"))
+        vim.keymap.set("n", "z", function() api.node.navigate.parent_close() end, opts("Close Node"))
+        vim.keymap.set("n", "Z", function() require("nvim-tree.api").tree.collapse_all() end, opts("Collapse All"))
+
       end
+
 
       nvim_tree.setup({
         on_attach = on_attach,
@@ -46,49 +49,6 @@ return {
       })
     end,
   },
-
-
-
-{
-  "nvim-tree/nvim-tree.lua",
-  lazy = false,
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  config = function()
-    local nvim_tree = require("nvim-tree")
-
-    local function on_attach(bufnr)
-      local api = require("nvim-tree.api")
-
-      local function opts(desc)
-        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-      end
-
-    vim.keymap.set("n", "z", function() require("nvim-tree.actions.node").close_node() end, opts("Close Node"))
-    vim.keymap.set("n", "Z", api.tree.collapse_all, opts("Collapse All"))
-
-    end
-
-    nvim_tree.setup({
-      on_attach = on_attach,
-      view = {
-        width = 30,
-        side = "left",
-      },
-      renderer = {
-        icons = {
-          show = {
-            git = true,
-            folder = true,
-            file = true,
-            folder_arrow = true,
-          },
-        },
-      },
-    })
-  end,
-},
-
-
 
   {
     "akinsho/toggleterm.nvim",
