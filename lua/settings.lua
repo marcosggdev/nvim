@@ -34,3 +34,23 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+-- Startify -> force cd to root dir using package.json location
+local function get_root_dir()
+  local util = require('lspconfig.util')
+  return util.root_pattern('package.json', 'tsconfig.json', '.git')(vim.fn.getcwd()) or vim.fn.getcwd()
+end
+
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  callback = function()
+    local root = get_root_dir()
+    if root then vim.cmd('cd ' .. root) end
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = { "*.ts", "*.tsx", "*.vue", "*.js", "*.jsx" },
+  callback = function()
+    vim.cmd("LspRestart")
+  end,
+})
+
