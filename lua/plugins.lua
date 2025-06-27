@@ -83,6 +83,7 @@ return {
       require("nvim-treesitter.configs").setup({
         ensure_installed = { "vue", "typescript", "javascript", "html", "css", "json" },
         highlight = { enable = true },
+        autotag = { enable = true }, -- Habilitar autotag
       })
     end,
   },
@@ -239,4 +240,22 @@ return {
     end,
   },
 
+  -- Nuevo: nvim-ts-autotag
+  {
+    "windwp/nvim-ts-autotag",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    event = "InsertEnter",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+
+  -- Nuevo: vim-matchup
+  {
+    "andymass/vim-matchup",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end,
+  },
 }
