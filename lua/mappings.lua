@@ -45,3 +45,19 @@ vim.keymap.set("i", "<C-l>", function()
   end
 end)
 
+-- neovim/nvim-lspconfig
+
+vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) --show docs
+
+-- nvim-tree/nvim-tree.lua
+local api = require("nvim-tree.api")
+
+local opts_with_open = vim.tbl_extend("force", opts, { desc = "Open" })
+local opts_with_close = vim.tbl_extend("force", opts, { desc = "Close Node" })
+local opts_with_collapse = vim.tbl_extend("force", opts, { desc = "Collapse All" })
+
+vim.keymap.set("n", "<CR>", function() api.node.open.edit() end, opts_with_open) --Open
+vim.keymap.set("n", "z", function() api.node.navigate.parent_close() end, opts_with_close) --Collapse current folder
+vim.keymap.set("n", "Z", function() api.tree.collapse_all() end, opts_with_collapse) --Collapse all folders
+
+

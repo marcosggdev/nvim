@@ -1,13 +1,26 @@
 return {
 
+  -- Language support
   {
     "neovim/nvim-lspconfig",
     config = function()
       local lspconfig = require("lspconfig")
-      -- tu configuración lsp aquí
+      local on_attach = function(client, bufnr)
+        local opts = { noremap = true, silent = true, buffer = bufnr }
+      end
+
+      lspconfig.tsserver.setup({
+        on_attach = on_attach,
+      })
+
+      lspconfig.volar.setup({
+        on_attach = on_attach,
+        filetypes = { "vue", "typescript", "typescriptreact" },
+      })
     end,
   },
 
+  -- Directory navigation
   {
     "nvim-tree/nvim-tree.lua",
     lazy = false,
@@ -22,11 +35,6 @@ return {
         local function opts(desc)
           return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
         end
-
-        vim.keymap.set("n", "<CR>", function() api.node.open.edit() end, opts("Open"))
-        vim.keymap.set("n", "z", function() api.node.navigate.parent_close() end, opts("Close Node"))
-        vim.keymap.set("n", "Z", function() require("nvim-tree.api").tree.collapse_all() end, opts("Collapse All"))
-
       end
 
 
@@ -50,6 +58,7 @@ return {
     end,
   },
 
+  -- Toggle a console
   {
     "akinsho/toggleterm.nvim",
     version = "*",
@@ -67,6 +76,7 @@ return {
     end,
   },
 
+  -- Dark theme
   {
     "folke/tokyonight.nvim",
     lazy = false,
@@ -76,6 +86,7 @@ return {
     end,
   },
 
+  -- Code highlighting
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -83,11 +94,12 @@ return {
       require("nvim-treesitter.configs").setup({
         ensure_installed = { "vue", "typescript", "javascript", "html", "css", "json" },
         highlight = { enable = true },
-        autotag = { enable = true }, -- Habilitar autotag
+        autotag = { enable = true },
       })
     end,
   },
 
+  -- Autocomplete
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -150,6 +162,7 @@ return {
     end,
   },
 
+  -- Snippets
   {
     "L3MON4D3/LuaSnip",
     dependencies = { "rafamadriz/friendly-snippets" },
@@ -158,6 +171,7 @@ return {
     end,
   },
 
+  -- Autocomplete (), "", {}, etc
   {
     "windwp/nvim-autopairs",
     config = function()
@@ -168,6 +182,7 @@ return {
     end,
   },
 
+  -- Format code
   {
     "mhartington/formatter.nvim",
     config = function()
@@ -206,6 +221,7 @@ return {
     end,
   },
 
+  -- Save nvim session: opened files, windows, etc.
   {
     "mhinz/vim-startify",
     config = function()
@@ -213,6 +229,7 @@ return {
     end,
   },
 
+  -- Find files quickly
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -240,7 +257,7 @@ return {
     end,
   },
 
-  -- Nuevo: nvim-ts-autotag
+  -- Autocomplete closing tags
   {
     "windwp/nvim-ts-autotag",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -250,7 +267,7 @@ return {
     end,
   },
 
-  -- Nuevo: vim-matchup
+  -- Improves pair coincidences, and highlights opening tag on top of the window
   {
     "andymass/vim-matchup",
     event = { "BufReadPost", "BufNewFile" },
